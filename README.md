@@ -46,6 +46,17 @@ Before running the code, make sure you have the following installed:
   - `password`: The password for the user's account
 - Returns: JSON response containing an authentication token
 
+## Update Notes
+
+Version 1.0 - 
+1. `User registration`: Allows users to register by providing username, email, and password.
+2. `User login`: Authenticates users by verifying their username/email and password.
+3. `Token-based authentication`: Generates and returns a token for authenticated users.
+4. `User storage`: Stores registered users in a list (database integration can be added).
+5. `JSON response`: Returns JSON responses for registration, login, and other API endpoints.
+6. `Flask framework`: Utilizes the Flask framework for building the API.
+7. `Basic implementation`: Provides a starting point for implementing authentication and authorization features.
+
 ## Contributing
 
 Contributions are welcome! If you find any issues or have suggestions for improvement, please create an issue or submit a pull request.
