@@ -1,50 +1,79 @@
 # Authentication and Authorization API
 
-This repository servers as an API that handles user authentication and authorization. It can provide features like user registration, login, password reset, and role-based access control. This API built using Flask, a web framework for Python.
+This is a simple RESTful API built with Flask that provides user registration, login, and token-based authentication. It allows users to register, log in, and access protected endpoints by providing a valid access token.
 
-## Prerequisites
+## Installation
 
-Before running the code, make sure you have the following installed:
+1. Clone the repository:
 
-- Python (version `3.6` or above)
-- Flask (install using `pip install flask`)
+   ```shell
+   git clone https://github.com/BitH0xker/Authentication-and-Authorization-API.git
+   ```
 
-## Getting Started
+2. Navigate to the project directory:
 
-1. Clone this repository to your local machine or download the source code as a ZIP file.
-2. Open a terminal or command prompt and navigate to the project directory.
+   ```shell
+   cd Authentication-and-Authorization-API
+   ```
+
+3. Install the required dependencies:
+
+   ```shell
+   pip install -r requirements.txt
+   ```
 
 ## Usage
 
-1. Run the following command to start the Flask development server:
+1. Start the server:
 
    ```shell
    python app.py
    ```
 
-2. The server should now be running on `http://localhost:5000`.
-3. Use an API testing tool (such as Postman or cURL) to interact with the API endpoints.
+2. The API is now running locally at `http://localhost:5000`.
 
-## API Endpoints
+### User Registration
 
-### Register
+**Endpoint**: `POST /register`
 
-- URL: `/register`
-- Method: POST
-- Parameters: JSON object with the following fields:
-  - `username`: The username of the user to be registered
-  - `email`: The email address of the user
-  - `password`: The password for the user's account
-- Returns: JSON response with a success message if the registration is successful
+Register a new user by sending a JSON payload with the following fields:
 
-### Login
+```json
+{
+  "username": "your-username",
+  "email": "your-email@example.com",
+  "password": "your-password"
+}
+```
 
-- URL: `/login`
-- Method: POST
-- Parameters: JSON object with the following fields:
-  - `username`: The username of the user trying to log in
-  - `password`: The password for the user's account
-- Returns: JSON response containing an authentication token
+### User Login
+
+**Endpoint**: `POST /login`
+
+Log in with an existing user by sending a JSON payload with the following fields:
+
+```json
+{
+  "username": "your-username",
+  "password": "your-password"
+}
+```
+
+The response will contain an access token that can be used for authentication.
+
+### Protected Endpoint
+
+**Endpoint**: `GET /protected`
+
+Access a protected endpoint by including the access token in the `Authorization` header of the request:
+
+```shell
+curl -X GET http://localhost:5000/protected -H "Authorization: Bearer your-access-token"
+```
+
+## Contributing
+
+Contributions are welcome! If you find a bug or want to enhance the functionality of this API, feel free to open an issue or submit a pull request.
 
 ## Update Notes
 
@@ -57,18 +86,15 @@ Version 1.0 -
 6. `Flask framework`: Utilizes the Flask framework for building the API.
 7. `Basic implementation`: Provides a starting point for implementing authentication and authorization features.
 
-## Contributing
+Version 1.1 - 
+- In this updated code, I've added the following changes:
+1. Imported the necessary libraries: `JWTManager` from flask_jwt_extended for token management and `generate_password_hash` and `check_password_hash` from werkzeug.security for password hashing.
+2. Configured the `JWT secret key` using app.config['JWT_SECRET_KEY']. Make sure to replace 'your_secret_key_here' with a secure secret key in your actual implementation.
+3. Modified the `/register` route to hash the password using `generate_password_hash` before storing it in the database.
+4. Modified the `/login` route to check the hashed password using `check_password_hash` and generate an access token using create_access_token.
+5. Added the `@jwt_required decorator` to the `/protected route` to ensure authentication is required to access this endpoint. The `get_jwt_identity()` function is used to retrieve the current user's identity from the token.
 
-Contributions are welcome! If you find any issues or have suggestions for improvement, please create an issue or submit a pull request.
 
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
-## Acknowledgements
-
-This API was built using the Flask framework. Special thanks to the Flask community for their excellent work.
-
-## Contact
-
-For any questions or inquiries, please contact through Mail address in bio.
