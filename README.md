@@ -7,7 +7,7 @@ This is a simple RESTful API built with Flask that provides user registration, l
 1. Clone the repository:
 
    ```shell
-   git clone https://github.com/BitH0xker/Authentication-and-Authorization-API.git
+   git clone https://github.com/PralinKhaira/Authentication-and-Authorization-API.git
    ```
 
 2. Navigate to the project directory:
